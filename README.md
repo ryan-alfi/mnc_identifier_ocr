@@ -21,7 +21,7 @@ dependencies:
   mnc_identifier_ocr: ^replace-with-latest-version
 ```
 
-The latest version is: **1.0.20**
+The latest version is: **1.0.22**
 
 ## Additional Steps
 
@@ -47,16 +47,27 @@ Add `NSCameraUsageDescription` key to your `info.plist` file. Describe why your 
 import 'package:mnc_identifier_ocr/mnc_identifier_ocr.dart';
 import 'package:mnc_identifier_ocr/model/ocr_result_model.dart';
 
-...
-
- Future<void> scanKtp() async {
-    try {
-      OcrResultModel res = await MncIdentifierOcr.startCaptureKtp(withFlash: true, cameraOnly: true);
-      debugPrint('result: ${res.toString()}');
-    } catch (e) {
-      debugPrint('something goes wrong $e');
-    }
+Future<void> scanKtp() async {
+  try {
+    OcrResultModel res = await MncIdentifierOcr.startCaptureKtp(
+      withFlash: true,
+      cameraOnly: true,
+    );
+    debugPrint('result: ${res.toJson()}');
+    debugPrint('KTP image path: ${res.imagePath}');
+    debugPrint('Face image path: ${res.faceImagePath}');
+    // Access KTP data fields
+    debugPrint('NIK: ${res.ktp?.nik}');
+    debugPrint('Nama: ${res.ktp?.nama}');
+    // ...and so on
+  } catch (e) {
+    debugPrint('something goes wrong $e');
   }
+}
 ```
 
-Note: on iOS, this plugin only works on real device
+- `imagePath` contains the path to the full KTP image.
+- `faceImagePath` contains the path to the cropped face image.
+- `ktp` contains the extracted KTP data fields.
+
+**Note:** On iOS, this plugin only works on a real device.
