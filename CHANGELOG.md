@@ -1,3 +1,9 @@
+## 1.0.22
+
+- Add mlkit face image detection to sdk
+- Add face image path to ocr result
+- Fix android gradle plugins
+
 ## 1.0.21
 
 - iOS: Update Depedencies Version
