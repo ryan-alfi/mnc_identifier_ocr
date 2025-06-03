@@ -10,12 +10,14 @@ class OcrResultModel {
     required this.isSuccess,
     required this.errorMessage,
     required this.imagePath,
+    required this.faceImagePath,
     required this.ktp,
   });
 
   final bool? isSuccess;
   final String? errorMessage;
   final String? imagePath;
+  String? faceImagePath;
   final Ktp? ktp;
 
   factory OcrResultModel.fromJson(String source) =>
@@ -27,6 +29,7 @@ class OcrResultModel {
         isSuccess: json["isSuccess"],
         errorMessage: json["errorMessage"],
         imagePath: json["imagePath"],
+        faceImagePath: json["faceImagePath"],
         ktp: Ktp.fromMap(json["ktp"]),
       );
 
@@ -34,8 +37,13 @@ class OcrResultModel {
         "isSuccess": isSuccess,
         "errorMessage": errorMessage,
         "imagePath": imagePath,
+        "faceImagePath": faceImagePath,
         "ktp": ktp?.toMap(),
       };
+
+  void setFaceImagePath(String? path) {
+    faceImagePath = path;
+  }
 }
 
 class Ktp {
